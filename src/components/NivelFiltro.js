@@ -1,6 +1,5 @@
-import React from "react";
-import { Text, StyleSheet, Pressable } from "react-native";
-import { colors, spacing, radius } from "../theme";
+import { Pressable, StyleSheet, Text } from "react-native";
+import { colors, radius, spacing } from "../theme";
 
 export default function NivelFiltro({ etiqueta, activo, onPress }) {
     return (
@@ -24,13 +23,12 @@ const styles = StyleSheet.create({
         borderRadius: radius.full,
         backgroundColor: colors.superficie,
         borderWidth: 1,
-        borderColor: colors.borde,
-        marginRight: spacing.sm,
+        borderColor: colors.textoSuave,
     },
     chipActivo: {
         backgroundColor: colors.primario,
         borderColor: colors.primario,
     },
-    texto: { fontSize: 13, fontWeight: '600', color: colors.textoSuave },
+    texto: { fontSize: 13, fontWeight: '600', color: '#000000' },
     textoActivo: { color: '#FFFFFF' },
 });

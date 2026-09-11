@@ -1,6 +1,6 @@
 //importaciones de librerías y hooks
-import React, { useState } from 'react';
-import { View, Text, TextInput, ScrollView, StyleSheet,FlatList } from 'react-native';
+import { useMemo, useState } from 'react';
+import { FlatList, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 
@@ -9,12 +9,12 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 
 // Importaciones de datos y temas
-import {useResponsive}from '../hooks/useResponsive';
 import Card from '../components/Card';
-import NivelFiltro from '../components/NivelFiltro';
-import { spacing, colors } from '../theme';
-import { NIVELES, CLASES } from '../data/clases';
 import EstadoVacio from '../components/EstadoVacio';
+import NivelFiltro from '../components/NivelFiltro';
+import { CLASES, NIVELES } from '../data/clases';
+import useResponsive from '../hooks/useResponsive';
+import { colors, spacing } from '../theme';
 
 
 export default function ClasesScreen({ navigation }) {
@@ -123,32 +123,34 @@ export default function ClasesScreen({ navigation }) {
 const styles = StyleSheet.create({
     pantalla: {
         flex: 1,
-        backgroundColor: colors.background,
-        paddingHorizontal: spacing[4],
+        backgroundColor: colors.fondo,
+        paddingHorizontal: spacing.xl,
     },
     headerTitulo: {
         fontSize: 20,
         fontWeight: 'bold',
-        marginBottom: spacing[4],
+        marginBottom: spacing.xl,
     },
     searchBar: {
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: '#e2e8f0',
         borderRadius: 8,
-        paddingHorizontal: spacing[3],
-        paddingVertical: spacing[2],
-        marginBottom: spacing[4],
+        paddingHorizontal: spacing.lg,
+        paddingVertical: spacing.md,
+        marginBottom: spacing.xl,
     },
     searchInput: {
         flex: 1, // Empuja todo el espacio hacia la derecha
         fontSize: 18,
         color: '#000',
-        paddingRight: spacing[2],
+        paddingRight: spacing.md,
     },
     nivelesContainer: {
         flexDirection: 'row',
-        marginBottom: spacing[4],
-        gap: spacing[2],
+        alignItems: 'center',
+        gap: spacing.md,
+        marginBottom: spacing.xl,
+        paddingRight: spacing.xl,
     },
 });

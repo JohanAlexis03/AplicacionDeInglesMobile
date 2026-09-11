@@ -1,5 +1,6 @@
-import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ClasesScreen from "../screens/ClasesScreen";
+import DetalleClaseScreen from "../screens/DetalleClase";
 
 const Stack = createNativeStackNavigator();
 
