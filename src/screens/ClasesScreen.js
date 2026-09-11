@@ -30,6 +30,8 @@ export default function ClasesScreen({ navigation }) {
         return CLASES.filter(clase => {
             const coincideNivel = nivel === "Todos" || clase.nivel === nivel;
             const coincideTextoBusqueda = clase.titulo.toLowerCase().includes(textBusqueda);
+            clase.titulo.toLowerCase().includes(textBusqueda) || clase.descripcion.toLowerCase().includes(textBusqueda);
+            clase.descripcion.toLowerCase().includes(textBusqueda);
             return coincideNivel && coincideTextoBusqueda;
         }
     )}, [busqueda, nivel]);

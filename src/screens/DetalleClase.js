@@ -1,58 +1,66 @@
-import { Image, ScrollView, StyleSheet, Text } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import EtiquetaNivel from '../components/EtiquetaNivel';
-import { colors, spacing, typography } from '../theme';
+import React,{useState,useMemo,useLayoutEffect} from 'react';
+import { Image, ScrollView, StyleSheet, Text, View, Alert} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
+import{useResponsive} from '../hooks/useResponsive';
+import { colors, spacing, typography, sombra,radius} from '../theme';
+import {formatoPrecio} from '../utils/formatoPrecio';
 
-export default function DetalleClaseScreen({ route }) {
+export default function DetalleClaseScreen({ route, navigation }) {
     const { clase } = route.params;
     const insets = useSafeAreaInsets();
+    const { esTable } = useResponsive();
 
     return (
-        <ScrollView
-            style={styles.pantalla}
-            contentContainerStyle={{
-                paddingTop: insets.top + spacing.md,
-                paddingBottom: insets.bottom + spacing.xl,
-                paddingLeft: insets.left + spacing.md,
-                paddingRight: insets.right + spacing.md,
-            }}
-        >
-            <Image source={{ uri: clase.imagen }} style={styles.imagen} />
-            <EtiquetaNivel nivel={clase.nivel} />
-            <Text style={styles.titulo}>{clase.titulo}</Text>
-            <Text style={styles.descripcion}>{clase.descripcion}</Text>
-            <Text style={styles.info}>Profesor: {clase.profesor?.nombre}</Text>
-            <Text style={styles.info}>Modalidad: {clase.modalidad}</Text>
-            <Text style={styles.info}>Duración: {clase.duracion} min</Text>
-        </ScrollView>
+        <View style ={styles.pantalla}>
+            <ScrollView
+            contentContainerStyle={{ paddingBottom: 120 }}
+            showsVerticalScrollIndicator={false}
+            >
+            <Image source={{ uri: clase.imagen }} 
+            style={[styles.portada,{height :esTable ?300:200}]} 
+            resizeMode="cover"
+            />
+            </ScrollView>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
-    pantalla: {
-        flex: 1,
-        backgroundColor: colors.fondo,
-    },
-    imagen: {
-        width: '100%',
-        height: 220,
-        borderRadius: 12,
-        marginBottom: spacing.md,
-    },
-    titulo: {
-        ...typography.title,
-        marginTop: spacing.sm,
-        marginBottom: spacing.sm,
-        color: colors.texto,
-    },
-    descripcion: {
-        ...typography.body,
-        color: colors.textoSuave,
-        marginBottom: spacing.md,
-    },
-    info: {
-        ...typography.body,
-        color: colors.texto,
-        marginBottom: spacing.xs,
-    },
+  pantalla: { flex: 1, backgroundColor: colors.fondo },
+  portada: { width: '100%', backgroundColor: colors.primarioSuave },
+  datos: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: colors.superficie,
+    borderRadius: radius.lg,
+    paddingVertical: spacing.lg,
+  },
+  dato: { alignItems: 'center', gap: 2 },
+  datoValor: { fontSize: 16, fontWeight: '800', color: colors.texto },
+  profesor: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.md,
+    backgroundColor: colors.superficie,
+    borderRadius: radius.lg,
+    padding: spacing.lg,
+  },
+  avatar: { width: 48, height: 48, borderRadius: 24, backgroundColor: colors.borde },
+  profesorNombre: { fontSize: 15, fontWeight: '700', color: colors.texto },
+  descripcion: { ...typography.cuerpo, color: colors.textoSuave, lineHeight: 22, marginTop: spacing.sm },
+  barra: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.superficie,
+    borderTopWidth: 1,
+    borderTopColor: colors.borde,
+    paddingVertical: spacing.lg,
+    paddingTop: spacing.lg
+  },
+  precio: { fontSize: 18, fontWeight: '800', color: colors.primario },
 });
